@@ -1,22 +1,68 @@
-var elMap = document.getElementById('loc');                 // HTML element
-var msg = 'Sorry, we were unable to get your location.';    // No location msg
+$(document).ready(function($) {
 
-if (Modernizr.geolocation) {                                // Is geo supported
-    navigator.geolocation.getCurrentPosition(success, fail);  // Ask for location
-    elMap.textContent = 'Checking location...';               // Say checking...
-} else {                                                    // Not supported
-    elMap.textContent = msg;                                  // Add manual entry
-}
+    $.ajax({
+        url:"http://ipinfo.io",
+        dataType:'jsonp',
+        success: function(ipInfo){
 
-function success(position) {                                // Got location
-    msg = '<h3>Longitude:<br>';                               // Create message
-    msg += position.coords.longitude + '</h3>';               // Add longitude
-    msg += '<h3>Latitude:<br>';                               // Create message
-    msg += position.coords.latitude + '</h3>';                // Add latitude
-    elMap.innerHTML = msg;                                    // Show location
-}
+            $.ajax({
+                url : "http://api.wunderground.com/api/4fc8e7e8108a036d/conditions/q/" + ipInfo.loc + ".json",
+                dataType : "jsonp",
+                success : function(response) {
+                    var conditions = response.current_observation;
+                    var tempF = conditions.temp_f;
+                    var tempC = conditions.temp_c;
+                    var weatherIcon = conditions.icon_url;
+                    var weatherAlt = conditions.icon;
+                    var wuLogo = conditions.image.url;
+                    var city = conditions.observation_location.city.split(', ')[1];
+                    var state = conditions.observation_location.state;
+                    var weather = conditions.weather;
+                    var wind = conditions.wind_mph + 'mph, ' + conditions.wind_dir;
+                    var forecastUrl = conditions.forecast_url;
 
-function fail(msg) {                                        // Not got location
-    elMap.textContent = msg;                                  // Show error message
-    console.log(msg.code);                                    // Log the error
-}
+                    console.log(conditions);
+                    $('#weather-icon').attr({
+                        src: weatherIcon,
+                        alt: weatherAlt
+                    });
+                    $('#weather-underground').attr({
+                        src: wuLogo,
+                        alt: 'weatherunderground'
+                    });
+                    $('#wu-link').attr('href', forecastUrl);
+
+                    $('#temp').append(tempF + '° F');
+                    $('#city').append(city + ', ' + state);
+                    $('#weather').append(weather);
+                    $('#wind').append(wind);
+
+                    if (tempF < 40) {
+                        $('#app').addClass('cold');
+                    } else if (90 <= tempF) {
+                        $('#app').addClass('hot');
+                    } else {
+                        $('#app').addClass('mild');
+                    }
+
+                    $('#temp-btn').click(function() {
+
+                        if ($('#temp').hasClass('cel')) {
+                            $('#temp').removeClass('cel');
+                            $('#temp').addClass('far');
+                            $('#temp').empty().append(tempF + '° F');
+                        } else if ($('#temp').hasClass('far')) {
+                            $('#temp').removeClass('far');
+                            $('#temp').addClass('cel');
+                            $('#temp').empty().append(tempC + '° C');
+                        }
+
+                    });
+
+
+                }
+            });
+
+        }
+    });
+});
