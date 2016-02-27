@@ -1,28 +1,36 @@
-$(document).ready(function ($) {
+$(document).ready(function($) {
+
     $.ajax({
-        url: "http://ipinfo.io",
-        dataType: 'jsonp',
-        success: function (ipInfo) {
+        url:"http://ipinfo.io",
+        dataType:'jsonp',
+        success: function(ipInfo){
 
             $.ajax({
-                url: "http://api.wunderground.com/api/7377c002f8b742ea/conditions/q/" + ipInfo.loc + ".json",
-                dataType: "jsonp",
-                success: function (response) {
+                url : "http://api.wunderground.com/api/7377c002f8b742ea/conditions/q/" + ipInfo.loc + ".json",
+                dataType : "jsonp",
+                success : function(response) {
                     var conditions = response.current_observation;
                     var tempF = conditions.temp_f;
                     var tempC = conditions.temp_c;
                     var weatherIcon = conditions.icon_url;
                     var weatherAlt = conditions.icon;
+                    var wuLogo = conditions.image.url;
                     var city = conditions.observation_location.city.split(', ')[1];
                     var state = conditions.observation_location.state;
                     var weather = conditions.weather;
                     var wind = conditions.wind_mph + 'mph, ' + conditions.wind_dir;
+                    var forecastUrl = conditions.forecast_url;
 
                     console.log(conditions);
                     $('#weather-icon').attr({
                         src: weatherIcon,
                         alt: weatherAlt
                     });
+                    $('#weather-underground').attr({
+                        src: wuLogo,
+                        alt: 'weatherunderground'
+                    });
+                    $('#wu-link').attr('href', forecastUrl);
 
                     $('#temp').append(tempF + '° F');
                     $('#city').append(city + ', ' + state);
@@ -39,6 +47,8 @@ $(document).ready(function ($) {
                     document.getElementsByClassName("color4")[0].style.color = color;
                     document.getElementsByClassName("color5")[0].style.color = color;
                     document.getElementsByClassName("color6")[0].style.backgroundColor = color;
+                    document.getElementsByClassName("more_info")[0].style.backgroundColor = color;
+                    document.getElementById("terminal").style.color = color;
 
                     $('#temp-btn').click(function () {
 

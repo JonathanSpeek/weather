@@ -41,12 +41,15 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="animate.css">
+
 </head>
 
 <body id="color1">
 <div class="container-fluid">
     <div class="row">
-        <div class="jumbotron col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 jumbo_margin">
+        <div class="jumbotron col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 jumbo_margin animated slideInLeft">
             <div id="app" class="text-center">
                 <div id="color2">
                     <h1><span class="fa-stack fa-lg">
@@ -76,6 +79,7 @@
                         <p id="wind" class="weather color5">Wind: </p>
 
                     </div>
+                    <a class="btn btn-primary btn-md button_color more_info" id="wu-link" href="http://www.wunderground.com/"><i class="fa fa-umbrella"></i> More Info</a>
                 </div>
             </div>
         </div>
@@ -83,8 +87,10 @@
 </div>
 
 <div class="footer">
-    <p align="center"><a href="http://jspeek.me">Made with <i
-            class="fa fa-heart"></i> by Jonathan Speek</a></p>
+    <p align="center"><a href="http://jspeek.me"><span class="fa-stack">
+  <i class="fa fa-square fa-stack-2x"></i>
+  <i class="fa fa-terminal fa-stack-1x fa-inverse" id="terminal"></i>
+</span> by Jonathan Speek</a></p>
 </div>
 
 </body>
