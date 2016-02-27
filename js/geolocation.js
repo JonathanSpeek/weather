@@ -5,7 +5,7 @@ $(document).ready(function ($) {
         success: function (ipInfo) {
 
             $.ajax({
-                url: "http://api.wunderground.com/api/4fc8e7e8108a036d/conditions/q/" + ipInfo.loc + ".json",
+                url: "http://api.wunderground.com/api/7377c002f8b742ea/conditions/q/" + ipInfo.loc + ".json",
                 dataType: "jsonp",
                 success: function (response) {
                     var conditions = response.current_observation;
@@ -13,36 +13,21 @@ $(document).ready(function ($) {
                     var tempC = conditions.temp_c;
                     var weatherIcon = conditions.icon_url;
                     var weatherAlt = conditions.icon;
-                    var wuLogo = conditions.image.url;
                     var city = conditions.observation_location.city.split(', ')[1];
                     var state = conditions.observation_location.state;
                     var weather = conditions.weather;
                     var wind = conditions.wind_mph + 'mph, ' + conditions.wind_dir;
-                    var forecastUrl = conditions.forecast_url;
 
                     console.log(conditions);
                     $('#weather-icon').attr({
                         src: weatherIcon,
                         alt: weatherAlt
                     });
-                    $('#weather-underground').attr({
-                        src: wuLogo,
-                        alt: 'weatherunderground'
-                    });
-                    $('#wu-link').attr('href', forecastUrl);
 
                     $('#temp').append(tempF + '° F');
                     $('#city').append(city + ', ' + state);
                     $('#weather').append(weather);
                     $('#wind').append(wind);
-
-                    if (tempF < 40) {
-                        $('#app').addClass('cold');
-                    } else if (90 <= tempF) {
-                        $('#app').addClass('hot');
-                    } else {
-                        $('#app').addClass('mild');
-                    }
 
                     var myColors = ["#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#e67e22", "#e74c3c",
                         "#95a5a6", "#f39c12", "#d35400", "#c0392b", "#7f8c8d"];

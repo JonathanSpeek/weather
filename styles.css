@@ -8,6 +8,14 @@ p {
     font-weight: 900;
 }
 
+a {
+    color: white;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
 .jumbo_margin {
     margin-top: 80px;
     background: white;
@@ -31,19 +39,4 @@ p {
     background-color: #2980b9;
     border-color: #2980b9; /*set the color you want here*/
     outline: 0;
-}
-
-.cold {
-    background: url('http://www.naturewallpaper.eu/desktopwallpapers/winter/1920x1080/winter-tree-on-a-cold-winter-day-1920x1080.jpg');
-    background-size: cover;
-}
-
-.mild {
-    background: url('http://wallpaperscreenhd.com/wp-content/uploads/2015/07/Forest-Wallpaper-High-Definition.jpg');
-    background-size: cover;
-}
-
-.hot {
-    background: url('http://cdn.twitrcovers.com/wp-content/uploads/2012/09/Desert-1.jpg');
-    background-size: cover;
 }
