@@ -43,31 +43,41 @@
 
 </head>
 
-<body class="bg-warning">
-<div id="app" class="text-center">
-    <h1 class="head bg-warning">Local Weather App</h1>
-    <div id="temp-container" class="bg-warning">
-        <img id="weather-icon" class="icon" src="http://icons.wxug.com/i/c/k/partlycloudy.gif">
-        <div>
-            <p id="temp" class="weather far"></p>
-            <button id="temp-btn" class="btn btn-primary">°F / °C</button>
+<body id="color1">
+<div class="container-fluid">
+    <div class="row">
+        <div class="jumbotron col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 jumbo_margin">
+            <div id="app" class="text-center">
+                <div id="color2">
+                    <h1 id="city" class="weather"></h1>
+                </div>
+                <div id="temp-container">
+                    <img id="weather-icon" class="icon" src="http://icons.wxug.com/i/c/k/partlycloudy.gif">
+                    <div>
+                        <div id="color3">
+                            <h2 id="temp" class="weather far"></h2>
+                        </div>
+                        <input class="btn btn-primary btn-md button_color color6" type="button" id="temp-btn"
+                               value="°F / °C"
+                               onclick="GetValue();"/>
+                    </div>
+                </div>
+                <br/>
+                <div id="weather-conditions">
+                    <div class="row">
+
+                        <p id="weather" class="weather color4">Conditions: </p>
+
+
+                        <p id="wind" class="weather color5">Wind: </p>
+
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div id="weather-conditions" class="container bg-warning">
-        <div class="row">
-            <div class="col-xs-4">
-                <p id="city" class="weather bg-warning"></p>
-            </div>
-            <div class="col-xs-4">
-                <p id="weather" class="weather bg-warning"></p>
-            </div>
-            <div class="col-xs-4">
-                <p id="wind" class="weather bg-warning"></p>
-            </div>
-        </div>
-        <a id="wu-link" href="http://www.wunderground.com/"><img id="weather-underground" class="icon" src="http://icons.wxug.com/graphics/wu2/logo_130x80.png"></a>
     </div>
 </div>
+
 </body>
 
 <footer>
