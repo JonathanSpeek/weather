@@ -1,13 +1,13 @@
-$(document).ready(function($) {
+$(document).ready(function ($) {
     $.ajax({
-        url:"http://ipinfo.io",
-        dataType:'jsonp',
-        success: function(ipInfo){
+        url: "http://ipinfo.io",
+        dataType: 'jsonp',
+        success: function (ipInfo) {
 
             $.ajax({
-                url : "http://api.wunderground.com/api/4fc8e7e8108a036d/conditions/q/" + ipInfo.loc + ".json",
-                dataType : "jsonp",
-                success : function(response) {
+                url: "http://api.wunderground.com/api/4fc8e7e8108a036d/conditions/q/" + ipInfo.loc + ".json",
+                dataType: "jsonp",
+                success: function (response) {
                     var conditions = response.current_observation;
                     var tempF = conditions.temp_f;
                     var tempC = conditions.temp_c;
@@ -55,7 +55,7 @@ $(document).ready(function($) {
                     document.getElementsByClassName("color5")[0].style.color = color;
                     document.getElementsByClassName("color6")[0].style.backgroundColor = color;
 
-                    $('#temp-btn').click(function() {
+                    $('#temp-btn').click(function () {
 
                         if ($('#temp').hasClass('cel')) {
                             $('#temp').removeClass('cel');
@@ -68,7 +68,6 @@ $(document).ready(function($) {
                         }
 
                     });
-
 
                 }
             });
